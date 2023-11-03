@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import BatteryBoard from "./BatteryBoard";
 import ChatComponent from "../../components/chatbot/ChatComponent";
+import BMSData from "../../components/analysis/BMSdata";
+import AnalysisResult from "../../components/analysis/AnalysisResult"
 import { BiLineChart } from "react-icons/bi";
 
 const Board = () => {
@@ -11,6 +13,8 @@ const Board = () => {
         <BiLineChart></BiLineChart>측정 데이터
       </S.Title>
       <BatteryBoard></BatteryBoard>
+      <BMSData></BMSData>
+      <AnalysisResult></AnalysisResult>
       <ChatComponent />
     </S.Container>
   );
