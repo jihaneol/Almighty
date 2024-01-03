@@ -1,28 +1,23 @@
 package com.example.A201.words.service;
 
 import com.example.A201.battery.domain.Battery;
-import com.example.A201.battery.repository.BatteryRepository;
 import com.example.A201.history.constant.ResultStatus;
 import com.example.A201.progress.domain.Progress;
-import com.example.A201.progress.dto.ProgressDTO;
 import com.example.A201.progress.dto.ProgressResultDTO;
 import com.example.A201.progress.repository.ProgressRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.util.IOUtils;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -35,23 +30,13 @@ public class WordServiceImpl implements WordService{
     public byte[] createWordDocument(ProgressResultDTO progress, String fileName) throws IOException, InvalidFormatException {
         Progress progressEntity = progressRepository.findById(progress.getProgressId()).orElseThrow(() -> new IllegalStateException("해당 배터리를 찾을 수 없습니다"));
         Battery battery = progressEntity.getBattery();
-//        String directoryPath = "c:/batteryword/";
-//        File directory = new File(directoryPath);
 
-        // 디렉토리가 없으면 생성
-//        if (!directory.exists()) {
-//            directory.mkdirs(); // 여러 중첩 디렉토리를 생성할 수도 있으므로 mkdirs() 사용
-//        }
 
-        // 파일 생성 경로
-//        String filePath = directoryPath + battery.getCode() + fileName;
         XWPFDocument document = new XWPFDocument();
         String currentDir = System.getProperty("user.dir");
         System.out.println("Current dir: " + currentDir);
         InputStream resource = getClass().getResourceAsStream("/images/sdilogo.png");
-//        ClassPathResource cpr = new ClassPathResource("images/sdilogo.png");
-        // 이미지 워터마크 추가
-//        String imgPath = resource.getFile(); // 이미지 파일 경로
+
         addImageWatermark(document, resource.readAllBytes());
 
         XWPFParagraph titleParagraph  = document.createParagraph();
@@ -107,12 +92,12 @@ public class WordServiceImpl implements WordService{
         setCellText(rowTwo.getCell(2), "기업명", true);
         setCellText(rowTwo.getCell(3), battery.getMember().getCompany(), false);
 
-// 세 번째 행 설정
+        // 세 번째 행 설정
         XWPFTableRow rowThree = table.createRow();
         setCellText(rowThree.getCell(0), "귀책", true);
         setCellText(rowThree.getCell(1), progress.getResultStatus().equals(ResultStatus.Normal)?"정상":progress.getResultStatus().equals(ResultStatus.SdiFault)?"배터리 불량":"고객 귀책", false);
 
-// 네 번째 행 설정
+        // 네 번째 행 설정
         XWPFTableRow rowFour = table.createRow();
         setCellText(rowFour.getCell(0), "세부 사항", true);
         // 병합하기 위해 빈 셀로 남겨두기
@@ -145,16 +130,11 @@ public class WordServiceImpl implements WordService{
 
         cellFive.setText(extendedContent);
 
-
         // 셀 병합
         mergeCellHorizontally(table, 2, 1, 3);
         mergeCellHorizontally(table, 3, 0, 3);
         mergeCellHorizontally(table, 4, 0, 3);
-        //rowFive.setHeight((short)600);
-//        try (FileOutputStream out = new FileOutputStream(filePath)) {
-//            document.write(out);
-//            out.close();
-//        }
+
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
             document.write(byteArrayOutputStream);
             byte[] output = byteArrayOutputStream.toByteArray();
@@ -194,9 +174,6 @@ public class WordServiceImpl implements WordService{
 
     private void addImageWatermark(XWPFDocument document, byte[] imgPath) throws IOException, InvalidFormatException {
         byte[] imageBytes = imgPath;
-//        try (FileInputStream fis = new FileInputStream(imgPath)) {
-//            imageBytes = IOUtils.toByteArray(fis);
-//        }
 
         XWPFHeaderFooterPolicy policy = new XWPFHeaderFooterPolicy(document);
         XWPFHeader header = policy.createHeader(XWPFHeaderFooterPolicy.DEFAULT);

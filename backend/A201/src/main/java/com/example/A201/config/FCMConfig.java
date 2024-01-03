@@ -22,9 +22,7 @@ public class FCMConfig {
 
         FirebaseApp firebaseApp = null;
         List<FirebaseApp> firebaseAppList = FirebaseApp.getApps();
-        for(FirebaseApp a : firebaseAppList){
-            System.out.println(a.toString());
-        }
+
         if (firebaseAppList != null && !firebaseAppList.isEmpty()) {
             for (FirebaseApp app : firebaseAppList) {
                 if (app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {

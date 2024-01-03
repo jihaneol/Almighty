@@ -6,7 +6,5 @@ import lombok.Getter;
 public class StatusHistoryRequest {
     private Long batteryId;
     private String expertStatus;
-//    private String fromStatus;
-//    private String toStatus;
     private String requestReason;
 }

@@ -1,6 +1,5 @@
 package com.example.A201.history.repository;
 
-import com.example.A201.history.constant.ResultStatus;
 import com.example.A201.history.domain.StatusHistory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,10 +20,6 @@ public interface StatusHistoryRepository extends JpaRepository<StatusHistory,Lon
     @Query(value =  "select s from StatusHistory s join fetch s.battery b order by s.date desc"
             , countQuery = "select count(s) from StatusHistory s")
     Page<StatusHistory> findAll(Pageable pageable);
-
-//    StatusHistory findByToStatusAndBatteryId(Status toStatus, Long batteryId);
-
-//    StatusHistory findByExpertStatusAndBatteryId(ResultStatus resultStatus, Long batteryId);
 
     StatusHistory save(StatusHistory statusHistory);
 }

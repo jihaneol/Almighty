@@ -1,7 +1,6 @@
 package com.example.A201.chatbot.repository;
 
 import com.example.A201.chatbot.domain.ChatLog;
-import com.example.A201.progress.domain.Progress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

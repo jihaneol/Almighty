@@ -1,7 +1,8 @@
 package com.example.A201.progress.dto;
 
 import com.example.A201.progress.constant.ProgressStatus;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

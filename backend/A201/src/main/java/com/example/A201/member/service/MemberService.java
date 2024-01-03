@@ -52,7 +52,6 @@ public class MemberService {
                 .build();
 
         return dto;
-        //return memberRepository.findByLoginId(loginId).orElse(null);
     }
 
     @Transactional

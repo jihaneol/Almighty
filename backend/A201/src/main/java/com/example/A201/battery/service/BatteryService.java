@@ -1,8 +1,8 @@
 package com.example.A201.battery.service;
 
 import com.example.A201.battery.dto.BatteryDTO;
-import com.example.A201.battery.vo.BatteryResponse;
 import com.example.A201.battery.vo.BatteryDataResponse;
+import com.example.A201.battery.vo.BatteryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,8 +18,6 @@ public interface BatteryService {
     Long getMemberId(Long batteryId);
 
     Page<BatteryResponse> getBatteries(Long memberId, Pageable pageable);
-
-//    Battery updateBatteryStatue(Long batteryId, BatteryStatus batteryStatus);
 
     List<BatteryResponse> getRequestBatteries();
 

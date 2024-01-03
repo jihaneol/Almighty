@@ -51,18 +51,10 @@ public class AuthApiController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthDto.LoginDto loginDto) {
         // User 등록 및 Refresh Token 저장
-//        loginDto.setPassword("{noop}" + loginDto.getPassword());
         AuthDto.TokenDto tokenDto = authService.login(loginDto);
 
         String loginId = loginDto.getLoginId();
         MemberDTO member = memberService.getMemberByLoginId(loginId);
-
-        // RT 저장
-//        HttpCookie httpCookie = ResponseCookie.from("refresh-token", tokenDto.getRefreshToken())
-//                .maxAge(COOKIE_EXPIRATION)
-//                .httpOnly(true)
-//                .secure(true)
-//                .build();
 
         ResponseCookie refreshTokenCookie = ResponseCookie.from("refresh_token", tokenDto.getRefreshToken())
                 .maxAge(COOKIE_EXPIRATION)
@@ -75,16 +67,6 @@ public class AuthApiController {
                 .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenDto.getAccessToken())
                 .body(member);
-
-/*
-        return ResponseEntity.ok()
-//                .header("REFRESH_TOKEN", httpCookie.toString())
-                .header("REFRESH_TOKEN", tokenDto.getRefreshToken())
-                // AT 저장
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + tokenDto.getAccessToken())
-                .build();
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("이메일 인증 안됨");
-*/
     }
 
     @PostMapping("/validate")
@@ -98,7 +80,6 @@ public class AuthApiController {
 
     // 토큰 재발급
     @PostMapping("/reissue")
-//    public ResponseEntity<?> reissue(@CookieValue(name = "refresh-token") String requestRefreshToken,
     public ResponseEntity<?> reissue(@RequestHeader() Map<String, String> headers) {
         System.out.println("headers: " + headers);
         String requestAccessToken = headers.get("authorization");

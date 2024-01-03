@@ -1,10 +1,10 @@
 package com.example.A201.history.service;
 
 import com.example.A201.battery.domain.Battery;
+import com.example.A201.battery.repository.BatteryRepository;
 import com.example.A201.history.constant.ResultStatus;
 import com.example.A201.history.domain.StatusHistory;
 import com.example.A201.history.dto.StatusHistoryDTO;
-import com.example.A201.battery.repository.BatteryRepository;
 import com.example.A201.history.repository.StatusHistoryRepository;
 import com.example.A201.history.vo.request.StatusHistoryRequest;
 import com.example.A201.history.vo.response.StatusHistoryResponse;
@@ -67,8 +67,6 @@ public class StatusHistoryServiceImpl implements StatusHistoryService{
         StatusHistoryDTO dto = new StatusHistoryDTO();
         dto.setBatteryId(battery.getId());
         dto.setExpertStatus(ResultStatus.valueOf(request.getExpertStatus()));
-//        dto.setFromStatus(Status.valueOf(request.getFromStatus()));
-//        dto.setToStatus(Status.valueOf(request.getToStatus()));
         dto.setReason(request.getRequestReason());
         return dto;
     }

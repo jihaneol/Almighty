@@ -32,7 +32,6 @@ public class BoardServiceImpl implements BoardService{
     public BoardResponse getBoard(Long progressId){
         BmsBoard bms = bmsBoardRepository.findByProgress(progressId).orElseThrow(() -> new EntityNotFoundException("해당 분석 요청을 찾을 수 없습니다"));
         PageRequest pageable = PageRequest.of(0, 5000);
-//        List<VitBoard> vit = vitBoardRepository.findByProgress(progressId, pageable);
         List<VitBoard> vit = vitBoardRepository.findVitBoardByProgressId(progressId);
         Progress progress = progressRepository.findById(progressId).orElseThrow();
         return BoardResponse.boardResponse(BmsResponse.bmsResponse(bms),

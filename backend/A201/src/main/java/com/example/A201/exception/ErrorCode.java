@@ -21,8 +21,7 @@ public enum ErrorCode {
     METADATA_NOT_FOUND(HttpStatus.NOT_FOUND,"해당하는 정보의 메타 데이터를 찾을 수 없습니다." ),
     
     /*MODEL ERROR CODE*/
-    MODEL_NOT_FOUND(HttpStatus.NOT_FOUND,"해당하는 정보의 배터리 모델을 찾을 수 없습니다.")
-    ;
+    MODEL_NOT_FOUND(HttpStatus.NOT_FOUND,"해당하는 정보의 배터리 모델을 찾을 수 없습니다.");
     private final HttpStatus httpStatus;
     private final String message;
 }

@@ -5,22 +5,22 @@ import com.example.A201.alarm.domain.constant.Title;
 import com.example.A201.alarm.dto.AlarmDto;
 import com.example.A201.alarm.service.AlarmService;
 import com.example.A201.battery.constant.BatteryStatus;
-import com.example.A201.exception.CustomException;
-import com.example.A201.history.constant.ResultStatus;
-import com.example.A201.progress.constant.ProgressStatus;
 import com.example.A201.battery.domain.Battery;
-import com.example.A201.progress.domain.Progress;
+import com.example.A201.battery.repository.BatteryRepository;
+import com.example.A201.exception.CustomException;
+import com.example.A201.firebase.FCMNotificationRequestDto;
+import com.example.A201.firebase.FCMNotificationService;
+import com.example.A201.history.constant.ResultStatus;
 import com.example.A201.history.domain.StatusHistory;
+import com.example.A201.history.repository.StatusHistoryRepository;
+import com.example.A201.member.domain.Member;
+import com.example.A201.progress.constant.ProgressStatus;
+import com.example.A201.progress.domain.Progress;
 import com.example.A201.progress.dto.ProgressDTO;
 import com.example.A201.progress.dto.ProgressIdDTO;
 import com.example.A201.progress.dto.ProgressListDTO;
 import com.example.A201.progress.dto.ProgressResultDTO;
-import com.example.A201.battery.repository.BatteryRepository;
-import com.example.A201.firebase.FCMNotificationRequestDto;
-import com.example.A201.firebase.FCMNotificationService;
 import com.example.A201.progress.repository.ProgressRepository;
-import com.example.A201.history.repository.StatusHistoryRepository;
-import com.example.A201.member.domain.Member;
 import com.example.A201.progress.vo.MailInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -115,43 +115,26 @@ public class ProgressServiceImpl implements ProgressService{
         Member member = battery.getMember();
         ResultStatus resultStatus = resultDto.getResultStatus();
 
-
-//        StatusHistory statusHistory = statusHistoryRepository.findByExpertStatusAndBatteryId(resultDto.getResultStatus(), battery.getId());
-//        statusHistory.setFromStatus(ProgressStatus.Request);
-//        statusHistory.setToStatus(p.getCurrentProgressStatus());
-//        statusHistory.setExpertStatus(resultDto.getResultStatus());
-//        statusHistory.setResponseReason(resultDto.getResponseReason());
-//        statusHistoryRepository.save(statusHistory);
-
         statusHistoryRepository.save(StatusHistory.builder()
                 .expertStatus(resultStatus)
                 .battery(battery)
                 .requestReason(progress.getReason())
                 .responseReason(resultDto.getResponseReason())
                 .build());
-//        statusHistoryRepository.save(StatusHistory.builder()
-//                .toStatus(progress.getToStatus())
-//                .fromStatus(battery.getBatteryStatus())
-//                .battery(battery)
-//                .requestReason(p.getReason())
-//                .responseReason(progress.getResponseReason())
-//                .build());
 
         String reason;
         if(resultDto.getResponseReason() == null) reason = resultDto.getRequestReason();
         else reason = resultDto.getResponseReason();
 
-//        Long memberId = batteryService.getMemberId(progress.getBatteryId());
 
         alarmService.insertAlarm(AlarmDto.builder()
                 .title(resultStatus.equals(ResultStatus.SdiFault)?"반송 수락":"반송 거절")
                 .content(reason)
                 .member(member.getMemberId())
                 .build());
-        log.debug("여기까지 완료");
+
         try {
             fcmNotificationService.sendNotificationByToken(FCMNotificationRequestDto.builder()
-//                .title(String.valueOf(progress.getToStatus()))
                     .title(String.valueOf(resultStatus))
                     .body(reason)
                     .targetUserId(member.getMemberId())

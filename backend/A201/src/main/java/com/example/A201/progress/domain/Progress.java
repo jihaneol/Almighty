@@ -1,8 +1,7 @@
 package com.example.A201.progress.domain;
 
-import com.example.A201.progress.constant.ProgressStatus;
 import com.example.A201.battery.domain.Battery;
-import com.example.A201.common.BaseTime;
+import com.example.A201.progress.constant.ProgressStatus;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

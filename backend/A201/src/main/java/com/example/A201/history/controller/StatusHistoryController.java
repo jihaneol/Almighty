@@ -1,10 +1,10 @@
 package com.example.A201.history.controller;
 
+import com.example.A201.exception.SuccessResponseEntity;
 import com.example.A201.history.dto.StatusHistoryDTO;
 import com.example.A201.history.service.StatusHistoryService;
 import com.example.A201.history.vo.request.StatusHistoryRequest;
 import com.example.A201.history.vo.response.StatusHistoryResponse;
-import com.example.A201.exception.SuccessResponseEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

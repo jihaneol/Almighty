@@ -6,8 +6,8 @@ import com.example.A201.battery.domain.Model;
 import com.example.A201.battery.dto.BatteryDTO;
 import com.example.A201.battery.repository.BatteryRepository;
 import com.example.A201.battery.repository.ModelRepository;
-import com.example.A201.battery.vo.BatteryResponse;
 import com.example.A201.battery.vo.BatteryDataResponse;
+import com.example.A201.battery.vo.BatteryResponse;
 import com.example.A201.member.domain.Member;
 import com.example.A201.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static com.example.A201.exception.ErrorCode.USER_NOT_FOUND;
 
 @Service
 @Transactional(readOnly = true)
@@ -77,14 +75,6 @@ public class BatteryServiceImpl implements BatteryService{
         return batteryRepository.findByCode(code).map(battery -> BatteryDataResponse.batteryResponse(battery))
                 .orElseThrow(() -> new IllegalStateException("해당 배터리를 찾을 수 없습니다"));
     }
-
-//    @Override
-//    @Transactional
-//    public Battery updateBatteryStatue(Long batteryId, Status status) {
-//        Optional<Battery> battery = batteryRepository.findById(batteryId);
-//        battery.get().setBatteryStatus(status);
-//        return batteryRepository.save(battery.get());
-//    }
 
     @Override
     public Long getMemberId(Long batteryId){

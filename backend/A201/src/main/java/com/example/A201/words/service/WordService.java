@@ -1,6 +1,5 @@
 package com.example.A201.words.service;
 
-import com.example.A201.progress.dto.ProgressDTO;
 import com.example.A201.progress.dto.ProgressResultDTO;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 

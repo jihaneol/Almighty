@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class StatusHistoryDTO {
     private Long historyId;
     private Long batteryId;
-//    private Status aiStatus;
     private ResultStatus expertStatus;
     private LocalDateTime date;
     private String reason;

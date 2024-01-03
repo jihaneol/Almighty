@@ -1,6 +1,5 @@
 package com.example.A201.board.controller;
 
-import com.example.A201.battery.service.BatteryService;
 import com.example.A201.board.service.BoardService;
 import com.example.A201.exception.SuccessResponseEntity;
 import lombok.RequiredArgsConstructor;

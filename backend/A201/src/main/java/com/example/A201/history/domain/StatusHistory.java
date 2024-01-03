@@ -1,8 +1,8 @@
 package com.example.A201.history.domain;
 
+import com.example.A201.battery.domain.Battery;
 import com.example.A201.common.BaseTime;
 import com.example.A201.history.constant.ResultStatus;
-import com.example.A201.battery.domain.Battery;
 import com.example.A201.history.dto.StatusHistoryDTO;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -32,10 +32,6 @@ public class StatusHistory extends BaseTime {
     @CreatedDate
     private LocalDateTime date;
 
-//    @Setter
-//    @Enumerated(EnumType.STRING)
-//    private Status aiStatus;
-
     @Setter
     @Enumerated(EnumType.STRING)
     private ResultStatus expertStatus;
@@ -49,7 +45,6 @@ public class StatusHistory extends BaseTime {
     public static StatusHistory registerHistory(StatusHistoryDTO statusHistoryDTO,Battery battery){
         StatusHistory history = new StatusHistory();
         history.battery = battery;
-//        history.aiStatus = statusHistoryDTO.getFromStatus();
         history.expertStatus = statusHistoryDTO.getExpertStatus();
         history.date = LocalDateTime.now();
         history.requestReason = statusHistoryDTO.getReason();

@@ -1,7 +1,5 @@
 package com.example.A201.firebase;
 
-import com.example.A201.exception.CustomException;
-import com.example.A201.exception.ErrorCode;
 import com.example.A201.member.domain.Member;
 import com.example.A201.member.domain.Role;
 import com.example.A201.member.repository.MemberRepository;
@@ -85,10 +83,8 @@ public class FCMNotificationService {
 
         }
 
-        return "아무게";
+        return "";
     }
-
-
     public void updateFirebase(String firebaseToken, Long userId) {
         valueOperations.set(String.valueOf(userId), firebaseToken);
     }

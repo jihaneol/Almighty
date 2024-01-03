@@ -2,8 +2,8 @@ package com.example.A201.battery.controller;
 
 import com.example.A201.battery.dto.BatteryDTO;
 import com.example.A201.battery.service.BatteryService;
-import com.example.A201.battery.vo.BatteryResponse;
 import com.example.A201.battery.vo.BatteryDataResponse;
+import com.example.A201.battery.vo.BatteryResponse;
 import com.example.A201.exception.SuccessResponseEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,12 +39,6 @@ public class BatteryController {
         List<BatteryResponse> responses = batteryService.getBatteriesAll();
         return SuccessResponseEntity.toResponseEntity("배터리 데이터 불러오기 성공", responses);
     }
-
-//    @PutMapping("/{batteryId}")
-//    public ResponseEntity<?> updateBatteryStatus(@PathVariable("batteryId") Long batteryId, @RequestParam("batteryStatus") BatteryStatus batteryStatus) {
-//        Battery updateBattery = batteryService.updateBatteryStatue(batteryId, batteryStatus);
-//        return SuccessResponseEntity.toResponseEntity("상태 변경 완료", null);
-//    }
 
     @GetMapping("/member/{memberid}")
     public ResponseEntity<?> getMemberBattery(@PathVariable("memberid") Long memberId,@PageableDefault(size = 10) Pageable pageable) {

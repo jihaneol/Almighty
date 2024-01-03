@@ -32,7 +32,6 @@ public class AlarmController {
                                                  @PathVariable(value = "status",required = false) String status,
                                                  @RequestParam(defaultValue = "0", required = false) int pageIdx) {
         PageRequest pageRequest = PageRequest.of(pageIdx, 20);
-        log.info("========================={}",status);
         return ResponseEntity.ok(PageResponse.PageResponse("알람 로그 입니다.",alarmService.getAlarm(id, status, pageRequest)));
     }
 

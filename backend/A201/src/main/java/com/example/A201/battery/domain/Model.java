@@ -1,6 +1,5 @@
 package com.example.A201.battery.domain;
 
-import com.google.firebase.database.annotations.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 

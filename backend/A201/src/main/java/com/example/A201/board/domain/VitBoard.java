@@ -1,12 +1,14 @@
 package com.example.A201.board.domain;
 
-import com.example.A201.progress.domain.Progress;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 
 @Getter
 @AllArgsConstructor

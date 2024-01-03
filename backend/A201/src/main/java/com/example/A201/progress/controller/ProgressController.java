@@ -1,27 +1,22 @@
 package com.example.A201.progress.controller;
 
+import com.example.A201.exception.SuccessResponseEntity;
 import com.example.A201.progress.dto.ProgressDTO;
 import com.example.A201.progress.dto.ProgressIdDTO;
 import com.example.A201.progress.dto.ProgressResultDTO;
-import com.example.A201.exception.SuccessResponseEntity;
 import com.example.A201.progress.service.ProgressService;
 import com.example.A201.progress.vo.MailInfo;
 import com.example.A201.words.service.WordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/batteries/progress")

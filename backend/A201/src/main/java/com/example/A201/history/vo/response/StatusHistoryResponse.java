@@ -19,9 +19,7 @@ public class StatusHistoryResponse {
     private Long historyId;
     private Long batteryId;
     private String code;
-    private ResultStatus expertStatus;
-//    private Status fromStatus;
-//    private Status toStatus;
+    private ResultStatus expertStatus;;
     private LocalDateTime date;
     private String reason;
 
@@ -31,8 +29,6 @@ public class StatusHistoryResponse {
                 .batteryId(statusHistory.getBattery().getId())
                 .code(statusHistory.getBattery().getCode())
                 .expertStatus(statusHistory.getExpertStatus())
-//                .fromStatus(statusHistory.getFromStatus())
-//                .toStatus(statusHistory.getToStatus())
                 .date(statusHistory.getDate())
                 .reason(statusHistory.getResponseReason())
                 .build();
