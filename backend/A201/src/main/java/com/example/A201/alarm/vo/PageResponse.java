@@ -19,7 +19,8 @@ public class PageResponse {
     private Long totalElements;
     private Integer size;
     private Integer number;
-    public static PageResponse PageResponse(String message,Page page){
+    public static PageResponse PageResponse(String message,
+                                            Page page){
         return PageResponse.builder()
                 .message(message)
                 .data(page.getContent())

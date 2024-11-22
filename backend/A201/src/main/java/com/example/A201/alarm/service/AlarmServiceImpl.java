@@ -7,6 +7,7 @@ import com.example.A201.alarm.repository.AlarmRepository;
 import com.example.A201.alarm.vo.AlarmResponse;
 import com.example.A201.exception.CustomException;
 import com.example.A201.member.domain.Member;
+import com.example.A201.member.domain.Role;
 import com.example.A201.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -43,12 +44,10 @@ public class AlarmServiceImpl implements AlarmService {
     public Long countAlarm(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(() ->
                 new CustomException(USER_NOT_FOUND));
-        if(member.getRole().getTitle().equals("관리자")) {
+        if(member.getRole()== Role.ADMIN) {
             return alarmRepository.countByReceiverAndIsRead(Receiver.fromReceiver(member.getRole().getTitle()), false);
-        }else if(member.getRole().getTitle().equals("일반 사용자")){
-         return alarmRepository.countByReceiverAndMemberAndIsRead(Receiver.fromReceiver(member.getRole().getTitle()), member, false);
         }
-        return Long.valueOf(0);
+        return alarmRepository.countByReceiverAndMemberAndIsRead(Receiver.fromReceiver(member.getRole().getTitle()), member, false);
     }
 
     @Override
@@ -67,11 +66,10 @@ public class AlarmServiceImpl implements AlarmService {
                 new CustomException(USER_NOT_FOUND));
         Receiver receiver = Receiver.fromReceiver(member.getRole().getTitle());
 
-        if(member.getRole().getTitle().equals("관리자")) {
+        if(member.getRole() == Role.ADMIN) {
             alarmRepository.updateAdminAlarm(receiver );
-        }else if(member.getRole().getTitle().equals("일반 사용자")){
+        }else if(member.getRole() == Role.USER){
             alarmRepository.updateUserAlarm(member,receiver);
         }
-
     }
 }

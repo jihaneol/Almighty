@@ -12,7 +12,8 @@ public class SuccessResponseEntity<E> {
     private E data;
     private Boolean hasNext;
 
-    public static ResponseEntity<SuccessResponseEntity> toResponseEntity(String massage, Object data) {
+    public static ResponseEntity<SuccessResponseEntity> toResponseEntity(String massage,
+                                                                         Object data) {
         return ResponseEntity
                 .status(200)
                 .body(SuccessResponseEntity.builder()
@@ -21,7 +22,8 @@ public class SuccessResponseEntity<E> {
                         .build()
                 );
     }
-    public static ResponseEntity<SuccessResponseEntity> toResponseEntityPage(String massage, Object data,boolean hasNext) {
+    public static ResponseEntity<SuccessResponseEntity> toResponseEntityPage(String massage,
+                                                                             Object data,boolean hasNext) {
         return ResponseEntity
                 .status(200)
                 .body(SuccessResponseEntity.builder()

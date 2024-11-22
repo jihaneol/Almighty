@@ -33,6 +33,7 @@ const App = () => {
           <Header></Header>
           <Routes>
             <Route path={utils.URL.LOGIN.MAIN} element={<pages.Login />} />
+            <Route path={uti}></Route>
             <Route
               path={utils.URL.MOBILEALARM.MAIN}
               element={<pages.MobileAlarm />}

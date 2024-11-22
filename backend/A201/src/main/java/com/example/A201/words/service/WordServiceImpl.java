@@ -34,7 +34,6 @@ public class WordServiceImpl implements WordService{
 
         XWPFDocument document = new XWPFDocument();
         String currentDir = System.getProperty("user.dir");
-        System.out.println("Current dir: " + currentDir);
         InputStream resource = getClass().getResourceAsStream("/images/sdilogo.png");
 
         addImageWatermark(document, resource.readAllBytes());

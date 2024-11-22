@@ -20,7 +20,7 @@ spring:
         enabled: false
   redis:
     host: www.batteryalmighty.co.kr
-    password: almighty201
+    password: ${REDIS_PW}
     port: 6379
 
   jpa:

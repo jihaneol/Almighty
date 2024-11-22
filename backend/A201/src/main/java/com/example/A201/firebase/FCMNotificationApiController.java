@@ -18,13 +18,11 @@ public class FCMNotificationApiController {
     public String sendNotificationByToken(@RequestBody FCMNotificationRequestDto requestDto) {
         return fcmNotificationService.sendNotificationByToken(requestDto);
     }
-
     @PostMapping("/firebasetoken/{userId}")
-    public ResponseEntity<?> updateFirebase(@RequestBody Map<String,String> firebaseToken, @PathVariable("userId") Long userId) {
+    public ResponseEntity<?> updateFirebase(@RequestBody Map<String,String> firebaseToken,
+                                            @PathVariable("userId") Long userId) {
         fcmNotificationService.updateFirebase(firebaseToken.get("firebaseToken"),userId);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }

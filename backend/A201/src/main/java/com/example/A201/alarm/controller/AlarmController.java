@@ -21,7 +21,6 @@ public class AlarmController {
     private final AlarmService alarmService;
 
     /**
-     *
      * @param id 유저 아이디
      * @param status 접근 권한자
      * @param pageIdx 페이지 번호
@@ -53,9 +52,8 @@ public class AlarmController {
 
     @PutMapping("{memberId}")
     public ResponseEntity<?> updateAlarm(@PathVariable(value = "memberId") Long id) {
-        log.info("유저 아이디 = {}",id);
         alarmService.updateAlarm(id);
-        return ResponseEntity.ok("굳");
+        return ResponseEntity.ok("업데이트 완료");
     }
 
     @PostMapping

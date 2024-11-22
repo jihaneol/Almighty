@@ -48,7 +48,6 @@ public class Member {
         member.loginId = signupDto.getLoginId();
         member.password = signupDto.getPassword();
         member.company = signupDto.getCompany();
-//        member.createDate = LocalDate.now();
         member.tel = signupDto.getTel();
         member.email = signupDto.getEmail();
         member.role = Role.USER;

@@ -287,7 +287,8 @@ const S = {
       }
     }
   `,
-  AlarmCount: styled.div`
+  AlarmCount: styled.div
+  `
     color: #fff;
     width: 22px;
     height: 22px;
